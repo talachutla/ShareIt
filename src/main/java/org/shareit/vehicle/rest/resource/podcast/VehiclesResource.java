@@ -2,6 +2,7 @@ package org.shareit.vehicle.rest.resource.podcast;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,11 +18,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.shareit.vehicle.rest.dao.VehicleEntity;
 import org.shareit.vehicle.rest.errorhandling.AppException;
 import org.shareit.vehicle.rest.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -38,8 +39,41 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 @Produces({ MediaType.APPLICATION_JSON})
 public class VehiclesResource {
 
-	@Autowired
+	@Autowired(required = true)
 	private VehicleService vehicleService;
+
+
+    @GET
+    @Path("/test")
+    public Response testWebService(){
+        System.out.println("Inside the webservice......................");
+        return  Response.status(Response.Status.CREATED)// 201
+                .entity("testttttttttttttttttttt").build();
+
+    }
+    @GET
+    @Path("/delete/{id}")
+    public Response deleteEntity(@PathParam("id") Long id){
+        System.out.println("Inside the delete webservice......................");
+        vehicleService.deletePodcastById(id);
+        return  Response.status(Response.Status.CREATED)// 201
+                .entity("Successfully deleted the entity").build();
+
+    }
+    @GET
+    @Path("/save")
+    public Response saveEntity(){
+        System.out.println("Inside the save webservice......................");
+        VehicleEntity entity=new VehicleEntity();
+        entity.setDescription("desc");
+        entity.setFeed("feed");
+        entity.setInsertionDate(new Date());
+        entity.setTitle("new entity...");
+        vehicleService.save(entity);
+        return  Response.status(Response.Status.CREATED)// 201
+                .entity("Successfully saved the entity").build();
+
+    }
 
 	/*
 	 * *********************************** CREATE ***********************************
@@ -48,7 +82,7 @@ public class VehiclesResource {
 	/**
 	 * Adds a new resource (podcast) from the given json format (at least title
 	 * and feed elements are required at the DB level)
-	 * 
+	 *
 	 * @param vehicle
 	 * @return
 	 * @throws AppException
@@ -68,7 +102,7 @@ public class VehiclesResource {
 	/**
 	 * Adds a new podcast (resource) from "form" (at least title and feed
 	 * elements are required at the DB level)
-	 * 
+	 *
 	 * @param title
 	 * @param linkOnPodcastpedia
 	 * @param feed
@@ -101,7 +135,7 @@ public class VehiclesResource {
 	/**
 	 * A list of resources (here podcasts) provided in json format will be added
 	 * to the database.
-	 * 
+	 *
 	 * @param vehicles
 	 * @return
 	 * @throws AppException
@@ -120,7 +154,7 @@ public class VehiclesResource {
 	 */
 	/**
 	 * Returns all resources (podcasts) from the database
-	 * 
+	 *
 	 * @return
 	 * @throws IOException
 	 * @throws JsonMappingException
@@ -128,7 +162,7 @@ public class VehiclesResource {
 	 * @throws AppException
 	 */
 	@GET
-	//@Compress //can be used only if you want to SELECTIVELY enable compression at the method level. By using the EncodingFilter everything is compressed now. 
+	//@Compress //can be used only if you want to SELECTIVELY enable compression at the method level. By using the EncodingFilter everything is compressed now.
 	public List<Vehicle> getPodcasts(
 			@QueryParam("orderByInsertionDate") String orderByInsertionDate,
 			@QueryParam("numberDaysToLookBack") Integer numberDaysToLookBack)
@@ -156,13 +190,13 @@ public class VehiclesResource {
 //	public Vehicle getPodcastById(@PathParam("id") Long id, @QueryParam("detailed") boolean detailed)
 //			throws IOException,	AppException {
 //		Vehicle podcastById = vehicleService.getPodcastById(id);
-//		
+//
 //		return podcastById;
 ////		return Response.status(200)
 ////				.entity(podcastById, detailed ? new Annotation[]{VehicleDetailedView.Factory.get()} : new Annotation[0])
 ////				.header("Access-Control-Allow-Headers", "X-extra-header")
 ////				.allow("OPTIONS").build();
-//	}	
+//	}
 
 	/*
 	 * *********************************** UPDATE ***********************************
@@ -173,7 +207,7 @@ public class VehiclesResource {
 	 * there is no resource yet at the specified location, then a podcast
 	 * creation is executed and if there is then the resource will be full
 	 * updated.
-	 * 
+	 *
 	 * @param id
 	 * @param vehicle
 	 * @return

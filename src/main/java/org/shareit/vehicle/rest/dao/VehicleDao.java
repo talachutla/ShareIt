@@ -1,31 +1,26 @@
 package org.shareit.vehicle.rest.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * 
  * @author Santosh
  */
+
 public interface VehicleDao {
-	
-	public List<VehicleEntity> getPodcasts(String orderByInsertionDate);
+
+    VehicleEntity get(Long id);
+
+    VehicleEntity save(VehicleEntity object);
+
+    public List<VehicleEntity> getPodcasts(String orderByInsertionDate);
 
 	public List<VehicleEntity> getRecentPodcasts(int numberOfDaysToLookBack);
 	
-	/**
-	 * Returns a podcast given its id
-	 * 
-	 * @param id
-	 * @return
-	 */
 	public VehicleEntity getPodcastById(Long id);
 	
-	/**
-	 * Find podcast by feed
-	 * 
-	 * @param feed
-	 * @return the podcast with the feed specified feed or null if not existent 
-	 */
 	public VehicleEntity getPodcastByFeed(String feed);	
 
 	public void deletePodcastById(Long id);

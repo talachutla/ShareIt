@@ -15,9 +15,9 @@
 	   testOnBorrow="true"
 	   removeAbandoned="true"
 	   removeAbandonedTimeout="233"
-	   username="root"
-	   password=""
+	   username="rest"
+	   password="rest"
 	   driverClassName="com.mysql.jdbc.Driver"
-	   url="jdbc:mysql://localhost:3306/rest_demo?allowMultiQueries=true"
+	   url="jdbc:mysql://localhost:3306/rest?allowMultiQueries=true"
    /> 
 </Context>

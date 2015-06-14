@@ -28,7 +28,7 @@
     </bean>  
     	
 	<!-- =============== MyBATIS beans configuration ================== -->
-	<bean id="podcastDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<!--<bean id="podcastDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 	   <property name="sqlSessionFactory" ref="sqlSessionFactory"/>    
 	   <property name="mapperInterface" value="org.shareit.vehicle.rest.dao.VehicleDao" />
 	</bean>
@@ -44,7 +44,7 @@
     
     <bean id="podcastService" class="org.shareit.vehicle.rest.service.impl.VehicleServiceImpl" >
     	<property name="podcastDao" ref="podcastDao"/>
-    </bean>    
+    </bean>-->
     
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
 	    <property name="jndiName" value="java:comp/env/jdbc/restDemoDB" />

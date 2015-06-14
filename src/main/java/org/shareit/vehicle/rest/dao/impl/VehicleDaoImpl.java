@@ -1,25 +1,88 @@
 package org.shareit.vehicle.rest.dao.impl;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.TimeZone;
-
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TemporalType;
-import javax.persistence.TypedQuery;
-
 import org.shareit.vehicle.rest.dao.VehicleDao;
 import org.shareit.vehicle.rest.dao.VehicleEntity;
+import org.springframework.orm.ObjectRetrievalFailureException;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
+@Repository
 public class VehicleDaoImpl implements VehicleDao {
+	
+    private HibernateTemplate template;
 
-	@PersistenceContext(unitName="demoRestPersistence")
+    public void setTemplate(HibernateTemplate template) {
+        this.template = template;
+    }
+
+    @Override
+    public void deletePodcastById(Long id) {
+        template.delete(get(id));
+    }
+    @Override
+    public VehicleEntity get(Long id) {
+        VehicleEntity entity = template.get(VehicleEntity.class, id);
+
+        if (entity == null) {
+
+            throw new ObjectRetrievalFailureException(VehicleEntity.class, id);
+        }
+        return entity;
+    }
+    @Override
+    public VehicleEntity save(VehicleEntity object) {
+        template.save(object);
+        return object;
+    }
+
+    @Override
+    public List<VehicleEntity> getPodcasts(String orderByInsertionDate) {
+        return null;
+    }
+
+    @Override
+    public List<VehicleEntity> getRecentPodcasts(int numberOfDaysToLookBack) {
+        return null;
+    }
+
+    @Override
+    public VehicleEntity getPodcastById(Long id) {
+        return null;
+    }
+
+    @Override
+    public VehicleEntity getPodcastByFeed(String feed) {
+        return null;
+    }
+
+    @Override
+    public Long createPodcast(VehicleEntity podcast) {
+        return null;
+    }
+
+    @Override
+    public void updatePodcast(VehicleEntity podcast) {
+
+    }
+
+    @Override
+    public void deletePodcasts() {
+
+    }
+
+    @Override
+    public List<VehicleEntity> getLegacyPodcasts() {
+        return null;
+    }
+
+    @Override
+    public VehicleEntity getLegacyPodcastById(Long id) {
+        return null;
+    }
+
+	/*@PersistenceContext(unitName="demoRestPersistence")
 	private EntityManager entityManager;
 
 	@PersistenceContext(unitName="demoRestPersistenceLegacy")
@@ -123,6 +186,6 @@ public class VehicleDaoImpl implements VehicleDao {
 		} catch (NoResultException e) {
 			return null;
 		}
-	}
+	}*/
 
 }

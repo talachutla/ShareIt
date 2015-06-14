@@ -1,16 +1,23 @@
 package org.shareit.vehicle.rest.service;
 
-import java.util.List;
-
+import org.shareit.vehicle.rest.dao.VehicleEntity;
 import org.shareit.vehicle.rest.errorhandling.AppException;
 import org.shareit.vehicle.rest.errorhandling.CustomReasonPhraseException;
 import org.shareit.vehicle.rest.resource.podcast.Vehicle;
+
+import java.util.List;
 
 /**
  * 
  * @author ama
  */
+
 public interface VehicleService {
+
+
+    VehicleEntity get(Long id);
+
+    VehicleEntity save(VehicleEntity object);
 	
 	/*
 	 * ******************** Create related methods **********************

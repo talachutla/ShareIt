@@ -44,7 +44,7 @@
     <filter-mapping>
       <filter-name>springSecurityFilterChain</filter-name>
       <url-pattern>/manifest/*</url-pattern>
-    </filter-mapping>	
+    </filter-mapping>
      
 	<resource-ref>
         <description>Database resource for rest demo web application </description>

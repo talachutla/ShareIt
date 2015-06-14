@@ -16,14 +16,25 @@ import org.shareit.vehicle.rest.helpers.NullAwareBeanUtilsBean;
 import org.shareit.vehicle.rest.resource.podcast.Vehicle;
 import org.shareit.vehicle.rest.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Service
 public class VehicleServiceImpl implements VehicleService {
 
-	@Autowired
+	@Autowired(required = true)
 	VehicleDao vehicleDao;
-		
-	/********************* Create related methods implementation ***********************/
+
+    @Override
+    public VehicleEntity get(Long id) {
+        return vehicleDao.get(id);
+    }
+
+    @Override
+    public VehicleEntity save(VehicleEntity object) {
+        return vehicleDao.save(object);
+    }
+
+    /********************* Create related methods implementation ***********************/
 	@Transactional("transactionManager")
 	public Long createPodcast(Vehicle vehicle) throws AppException {
 		
