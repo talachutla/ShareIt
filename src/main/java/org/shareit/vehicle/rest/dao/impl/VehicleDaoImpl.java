@@ -17,11 +17,9 @@ public class VehicleDaoImpl implements VehicleDao {
         this.template = template;
     }
 
-    @Override
     public void deletePodcastById(Long id) {
         template.delete(get(id));
     }
-    @Override
     public VehicleEntity get(Long id) {
         VehicleEntity entity = template.get(VehicleEntity.class, id);
 
@@ -31,56 +29,55 @@ public class VehicleDaoImpl implements VehicleDao {
         }
         return entity;
     }
-    @Override
     public VehicleEntity save(VehicleEntity object) {
         template.save(object);
         return object;
     }
 
-    @Override
-    public List<VehicleEntity> getPodcasts(String orderByInsertionDate) {
-        return null;
-    }
+	public List<VehicleEntity> getPodcasts(String orderByInsertionDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public List<VehicleEntity> getRecentPodcasts(int numberOfDaysToLookBack) {
-        return null;
-    }
+	public List<VehicleEntity> getRecentPodcasts(int numberOfDaysToLookBack) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public VehicleEntity getPodcastById(Long id) {
-        return null;
-    }
+	public VehicleEntity getPodcastById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public VehicleEntity getPodcastByFeed(String feed) {
-        return null;
-    }
+	public VehicleEntity getPodcastByFeed(String feed) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public Long createPodcast(VehicleEntity podcast) {
-        return null;
-    }
+	public Long createPodcast(VehicleEntity podcast) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public void updatePodcast(VehicleEntity podcast) {
+	public void updatePodcast(VehicleEntity podcast) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	public void deletePodcasts() {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void deletePodcasts() {
+	public List<VehicleEntity> getLegacyPodcasts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    }
-
-    @Override
-    public List<VehicleEntity> getLegacyPodcasts() {
-        return null;
-    }
-
-    @Override
-    public VehicleEntity getLegacyPodcastById(Long id) {
-        return null;
-    }
+	public VehicleEntity getLegacyPodcastById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/*@PersistenceContext(unitName="demoRestPersistence")
 	private EntityManager entityManager;
